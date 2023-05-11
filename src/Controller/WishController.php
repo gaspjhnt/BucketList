@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\WishRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,16 +11,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class WishController extends AbstractController
 {
     #[Route('/', name: 'list')]
-    public function list(): Response
+    public function list(WishRepository $wishRepository): Response
     {
-        return $this->render('wish/list.html.twig');
+
+        $wishes = $wishRepository->findBy(["isPublished" => true], ["dateCreated" => "DESC"], 10, 0);
+        return $this->render('wish/list.html.twig', [
+            'wishes' => $wishes
+        ]);
     }
 
     #[Route('/{id}', name: 'show', requirements: ["id" => "\d+"])]
-    public function show(int $id): Response
+    public function show(int $id, WishRepository $wishRepository): Response
     {
+
+        $wish = $wishRepository->find($id);
+
+        if (!$wish){
+            //Permet de lancer une erreur 404
+            throw $this->createNotFoundException("Oops ! Wish not found !");
+        }
         return $this->render('wish/show.html.twig', [
-            "id" => $id
+            "wish" => $wish
         ]);
     }
 }

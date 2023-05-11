@@ -7,6 +7,10 @@
 {% block body %}
     <h1>Detail of a wish</h1>
     <br>
-    <p>{{ id }} </p>
+    <h3>{{ wish.title }}</h3>
+    <div>Description : {{ wish.description }}</div> <br>
+    <div>Author : {{ wish.author }}</div> <br>
+    <div>Creation date : {{ wish.dateCreated | date('Y-m-d') }}</div><br>
+
 {% endblock %}
 

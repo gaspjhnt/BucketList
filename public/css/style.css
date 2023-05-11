@@ -157,3 +157,20 @@ textarea{
 .seasons{
     margin-top: 15px;
 }
+
+
+
+/************************** PERSO *****************************************/
+
+.card{
+/*    border: 2px solid #dfdfdf;
+    padding: 3px;
+    margin: 1vh;*/
+    transition: 200ms all;
+}
+
+
+.card:hover{
+   /* border: 2px solid #BC956B;*/
+    transform: scale(1.003);
+}
