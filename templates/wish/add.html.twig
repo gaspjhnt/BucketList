@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | ADD
+{% endblock %}
+
+{% block body %}
+    {% embed 'vues/form/wish_form.html.twig' with {'wishForm' : wishForm}%}
+        {% block h2 %} Add a new Wish {% endblock %}
+        {% block buttonLabel %} Add {% endblock %}
+    {% endembed %}
+{% endblock %}
+

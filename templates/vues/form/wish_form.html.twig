@@ -1,0 +1,10 @@
+{% form_theme wishForm 'vues/theme/form_theme.html.twig' %}
+
+
+<h2>{% block h2 %} {% endblock %}</h2>
+<div>
+    {{ form_start(wishForm) }}
+    {{ form_widget(wishForm) }}
+    <button class="link_button">{% block buttonLabel %} {% endblock %}</button>
+    {{ form_end(wishForm) }}
+</div>
