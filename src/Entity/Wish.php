@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\WishRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: WishRepository::class)]
-#[ORM\HasLifecycleCallbacks]
 class Wish
 {
     #[ORM\Id]
@@ -51,6 +52,11 @@ class Wish
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateCreated = null;
+
+    #[ORM\ManyToOne(inversedBy: 'wishes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
 
     public function getId(): ?int
     {
@@ -122,6 +128,19 @@ class Wish
     public function setNewWish(){
         $this->setDateCreated(new \DateTime());
         $this->setIsPublished(true);
+    }
+
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+        return $this;
     }
 
 }

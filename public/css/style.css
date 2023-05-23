@@ -169,14 +169,30 @@ textarea{
 /************************** PERSO *****************************************/
 
 .card{
-/*    border: 2px solid #dfdfdf;
-    padding: 3px;
-    margin: 1vh;*/
-    transition: 200ms all;
+    min-width: 25vw;
+    text-align: center;
+    border: 3px solid white;
+    margin-bottom: 10px;
+    border-radius: 7px;
+    transition: 200ms transform;
+}
+
+.wish-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 
 .card:hover{
    /* border: 2px solid #BC956B;*/
-    transform: scale(1.003);
+    color: black;
+    transform: scale(1.03);
+    /*transform: rotate(360deg);*/
+    /*transform: translate(400px);*/
+    /*transform: rotateX(360deg);*/
+    /*transform: scaleX(3);*/
+    background-color: #ffffff;
+
+    
 }

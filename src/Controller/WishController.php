@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Wish;
 use App\Form\WishType;
+use App\Repository\CategoryRepository;
 use App\Repository\WishRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ class WishController extends AbstractController
 
 
     #[Route('/add', name: 'add')]
-    public function add(Request $request, WishRepository $wishRepository): Response
+    public function add(Request $request, WishRepository $wishRepository, CategoryRepository $categoryRepository): Response
     {
 
         $wish = new Wish();
@@ -37,6 +38,8 @@ class WishController extends AbstractController
 
         if ($wishForm->isSubmitted() && $wishForm->isValid()){
 
+            $wish->setIsPublished(true);
+            $wish->setDateCreated(new \DateTime());
 
             $wishRepository->save($wish, true);
 

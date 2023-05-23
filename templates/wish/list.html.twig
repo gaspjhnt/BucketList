@@ -7,6 +7,8 @@
             <a href="{{ path('wish_show', {'id': wish.id}) }}">
                <article class="card">
                    <h4>{{ wish.title | nl2br}} </h4>
+                   <div>{{ wish.author }}</div>
+                   <div>{{ wish.dateCreated | date('Y-m-d') }}</div>
                </article>
             </a>
 
