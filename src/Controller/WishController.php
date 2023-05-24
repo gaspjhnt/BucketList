@@ -6,6 +6,7 @@ use App\Entity\Wish;
 use App\Form\WishType;
 use App\Repository\CategoryRepository;
 use App\Repository\WishRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,11 +27,14 @@ class WishController extends AbstractController
     }
 
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/add', name: 'add')]
     public function add(Request $request, WishRepository $wishRepository, CategoryRepository $categoryRepository): Response
     {
+        $defaultAuthor = $this->getUser()->getUserIdentifier();
 
         $wish = new Wish();
+        $wish->setAuthor($defaultAuthor);
         $wishForm = $this->createForm(WishType::class, $wish);
 
 
